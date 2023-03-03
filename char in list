@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    char data;
+    Node* next;
+};
+
+bool is_character_in_list(Node* head, char target_character) {
+    Node* current = head;
+    while (current != nullptr) {
+        if (current->data == target_character) {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
+
+int main() {
+    // create a linked list with some characters
+    Node* head = new Node {'a', new Node {'b', new Node {'c', new Node {'d', new Node {'e', nullptr}}}}};
+    
+    // check if a given character is present in the list
+    char target_character = 'c';
+    if (is_character_in_list(head, target_character)) {
+        cout << target_character << " is in the list." << endl;
+    } else {
+        cout << target_character << " is not in the list." << endl;
+    }
+    
+    // free memory used by linked list
+    Node* current = head;
+    while (current != nullptr) {
+        Node* next = current->next;
+        delete current;
+        current = next;
+    }
+    
+    return 0;
+}
